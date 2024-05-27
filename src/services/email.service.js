@@ -8,13 +8,22 @@ export const emailService ={
     query,
     remove,
     post,
-    getById
+    getById,
+    getRandomFilter
 }
 
 _createEmailes()
 
-function query (){
-    return storageService.query(EMAIL_KEY)
+async function query (filterBy){
+    let emiles = await storageService.query(EMAIL_KEY)
+    if (filterBy){
+        let {from ="" , isStarred = false, isRead = false} = filterBy
+        emiles = emiles.filter(emile =>
+            emile.from.toLowerCase().includes(from.toLowerCase()) ///&&
+            // emile.isStarred.includes(isStarred) &&
+            // emile.isRead.includes(isRead)
+        )
+    } return emiles
 }
 
 function remove(emailId){
@@ -26,6 +35,14 @@ function post (EMAIL_KEY , obj){
 
 function getById(id) {
     return storageService.get(EMAIL_KEY, id)
+}
+
+function getRandomFilter(){
+    return{
+        from : "",
+        isStarred: false,
+        isRead: false
+    }
 }
 
 

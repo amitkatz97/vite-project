@@ -13,8 +13,8 @@ export function EmailPreview({emaile}){
             starClass === '★'
             setIsStared('★')
         } else {setIsStared ('☆')}
-
     }
+    // console.log(isStared)
 
     return(
         <>
