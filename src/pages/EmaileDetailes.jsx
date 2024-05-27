@@ -27,6 +27,7 @@ export function EmaileDetailes(){
             <h4>From : {email.from}</h4>
             <h4>sent at: {email.sentAt}</h4>
             <p>{email.body}</p>
+            <h4></h4>
         </section>
 
         <Link to ="/emailes">Back</Link>
