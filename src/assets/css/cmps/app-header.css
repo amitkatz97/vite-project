@@ -1,0 +1,27 @@
+.app-header{
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+}
+
+.app-header h1{
+    display: flex;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.app-header img{
+    align-items: center;
+    max-width: 60px;
+    max-height: 50px;
+}
+
+.app-header section.container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.app-header nav{
+    justify-content: space-between;
+}

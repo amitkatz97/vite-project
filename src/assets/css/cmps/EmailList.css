@@ -1,0 +1,26 @@
+
+.email-list{
+    border: solid 0.5px;
+    /* width: 600px; */
+
+}
+
+.email-list ul{
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+}
+
+.email-list table{
+    display: flex;
+    justify-content: space-between;
+    max-width: 650px;;
+}
+
+.email-list :hover{
+    background-color: rgb(189, 234, 241);
+}
+
+.email-list .emailes-actions{
+    display: flex;
+}
