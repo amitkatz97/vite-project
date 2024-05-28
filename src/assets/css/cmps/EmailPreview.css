@@ -37,6 +37,7 @@
 
 .emaile-preview .item3{
     /* background-color: rgb(231, 247, 206); */
+    margin-left: 100px;
     max-inline-size: 150px;
     min-inline-size: 150px;
 }
@@ -55,4 +56,12 @@
 
 .emaile-preview .actions button{
 margin: 4px;
+}
+
+.read {
+    background-color: brown;
+}
+
+.unread {
+    background-color:aliceblue; ;
 }

@@ -1,26 +1,57 @@
 import React from "react"
 import { Link } from "react-router-dom"
-const {useState} =React
 
-export function EmailPreview({emaile}){
+import { emailService } from "../services/email.service"
 
-    const [isStared, setIsStared] = useState('☆')
+const {useState , useEffect} =React
 
-    var starClass = isStared ? '☆' : '★'
+export function EmailPreview({emaile, onRemoveEmail}){
 
-    function onChangeStar(){
-        if (isStared === '☆' ){
-            starClass === '★'
-            setIsStared('★')
-        } else {setIsStared ('☆')}
+    const [isStarred, setIsStarred] = useState('☆')
+    const [isRead, setIsRead] = useState('read')
+
+    // useEffect(() =>{
+    //     setIsRead(isRead)
+    // }, [readClass])
+
+    var starClass = isStarred //emaile.isStarred ? '☆' : '★'
+    var readClass = emaile.isRead ? 'read' : 'unread'
+
+    async function onChangeStar(){
+        if (isStarred === '☆' ){
+            emaile.isStarred = true
+            setIsStarred('★')
+        } else {setIsStarred ('☆') , emaile.isStarred = false}
+        await emailService.update(emaile)
+        console.log(isStarred)
+        console.log(emaile.isStarred)
     }
-    // console.log(isStared)
+    
+
+    async function onRead(){
+        if (isRead === 'read'){
+            emaile.isRead = true
+            setIsRead('unread')
+        } else {setIsRead ('read') , emaile.isRead = false}
+        await emailService.update(emaile)
+        console.log(isRead)
+    }
+
+    async function onOpenMail(){
+        if (isRead === 'read'){
+            emaile.isRead = true
+            setIsRead('unread')
+        } await emailService.update(emaile)
+        console.log(isRead)
+    }
+
+    
 
     return(
         <>
         <article className="emaile-preview">
-        <button className={starClass} onClick={() => onChangeStar()}>{isStared}</button>
-            <Link to={`/emailes/${emaile.id}`}>
+        <button className={starClass} onClick={() => onChangeStar()}>{isStarred}</button>
+            <Link to={`/emailes/${emaile.id}`} className={readClass} onClick={() => onOpenMail()}>
             <section className="item1">
                 {emaile.from}
             </section>
@@ -32,8 +63,8 @@ export function EmailPreview({emaile}){
             </section>
             </Link>
             <section className="actions">
-                <button className="item4">Unread\Read</button>
-                <button>X</button>
+                <button className="item4" onClick={() => onRead()}>{isRead}</button>
+                <button onClick={() => onRemoveEmail(emaile.id)}>X</button>
             </section>
         </article>
        

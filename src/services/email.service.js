@@ -9,7 +9,8 @@ export const emailService ={
     remove,
     post,
     getById,
-    getRandomFilter
+    getRandomFilter,
+    update
 }
 
 _createEmailes()
@@ -17,10 +18,10 @@ _createEmailes()
 async function query (filterBy){
     let emiles = await storageService.query(EMAIL_KEY)
     if (filterBy){
-        let {from ="" , isStarred = false, isRead = false} = filterBy
+        let {from ="" , isStarred = false, isRead = false, subject =""} = filterBy
         emiles = emiles.filter(emile =>
-            emile.from.toLowerCase().includes(from.toLowerCase()) ///&&
-            // emile.isStarred.includes(isStarred) &&
+            emile.from.toLowerCase().includes(from.toLowerCase()) &&
+            emile.subject.toLowerCase().includes(subject.toLowerCase()) //&&
             // emile.isRead.includes(isRead)
         )
     } return emiles
@@ -33,6 +34,13 @@ function post (EMAIL_KEY , obj){
     return storageService.post(EMAIL_KEY, obj)
 }
 
+ function update(email){
+    if (email.id){
+        return storageService.put(EMAIL_KEY, email)
+    } else {console.log('Erorr!')}
+ }
+
+
 function getById(id) {
     return storageService.get(EMAIL_KEY, id)
 }
@@ -40,6 +48,7 @@ function getById(id) {
 function getRandomFilter(){
     return{
         from : "",
+        subject:"",
         isStarred: false,
         isRead: false
     }

@@ -9,4 +9,6 @@
 @import "cmps/app-header.css";
 @import "cmps/EmailList.css";
 @import "pages/EmailIndex.css";
-@import "cmps/EmailPreview.css"
+@import "cmps/EmailPreview.css";
+@import "cmps/EmailFilter.css";
+@import "pages/App.css"

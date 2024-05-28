@@ -1,0 +1,13 @@
+
+
+.email-filter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: pink;
+}
+
+.email-filter section{
+    margin: 5px;
+}

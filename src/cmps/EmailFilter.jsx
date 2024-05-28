@@ -14,25 +14,34 @@ export function EmailFilter({filterBy, onSetFilterBy}){
         // const value = target.value
         // setFilterToEdit(prevFilter => ({...prevFilter, from: value}))
         // filtering with global field that change according to input "name" :
-        let {value, name: field} =target
+        let {value, name: field, type} =target
+        // value = type ==='checkbox' ? true : value
         setFilterToEdit(prevFilter =>({...prevFilter, [field]:value}))
-
+        console.log(value)
     }
 
     function onSubmitFilter(ev){
         ev.preventDefault()
         onSetFilterBy(filterToEdit)
-        console.log("ev:", ev)
-        console.log("filter to edit:", filterToEdit)
+        // console.log("ev:", ev)
+        // console.log("filter to edit:", filterToEdit)
     }
 
 
-    const {from , isStarred} = filterToEdit
+    const {from , isStarred, subject} = filterToEdit
     return(
         <form onSubmit={onSubmitFilter} className="email-filter">
             <section>
                 <label htmlFor="from"> From</label> <br />
-                <input onChange={handleChange} name="from" id= "from" type="text" placeholder="Search in Email" value={from} />
+                <input onChange={handleChange} name="from" id= "from" type="text" placeholder="Search Contact" value={from} />
+            </section>
+            <section>
+                <label htmlFor="subject"> subject</label> <br />
+                <input onChange={handleChange} name="subject" id="subject" type="text" placeholder="Search by subject" value={subject} />
+            </section>
+            <section>
+                <label htmlFor="isStarred"> Favotirs</label> <br />
+                <input onChange={handleChange} name ="isStarred" id= "isStarred" type="checkbox" value={isStarred}></input>
             </section>
             <button>Submit</button>
         </form>

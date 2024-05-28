@@ -1,11 +1,11 @@
 import { EmailPreview } from "./EmailPreview.jsx"
 
-export function EmailList({emails}){
+export function EmailList({emails , onRemoveEmail}){
 
     return(
         <>
         <section className ="email-list">
-            <h1>Email list</h1>
+            {/* <h1>Email list</h1> */}
             <table>
                 <th>From</th>
                 <th>Subject</th>
@@ -14,7 +14,7 @@ export function EmailList({emails}){
                 <ul>
                     {emails.map(emaile => 
                         <li key ={emaile.id}>
-                            <EmailPreview emaile ={emaile} /> 
+                            <EmailPreview emaile ={emaile}  onRemoveEmail = {onRemoveEmail}/> 
                             {/* <section className="emailes-actions"> */}
                                
                             {/* </section> */}

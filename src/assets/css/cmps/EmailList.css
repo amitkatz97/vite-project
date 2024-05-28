@@ -13,6 +13,7 @@
 
 .email-list table{
     display: flex;
+    margin-left: 200px;
     justify-content: space-between;
     max-width: 650px;;
 }
