@@ -31,7 +31,6 @@ export function EmailIndex(){
             console.log("Having issues woth loading emailes", error)
         }
     }
-    // console.log(filterBy)
 
     function onSetFilterBy(filterBy){
         setFilterBy(prevFilter => ({...prevFilter,...filterBy}))
@@ -69,18 +68,16 @@ export function EmailIndex(){
     
 
     async function onRead(email){
-        if (email.isRead === false){
-            email.isRead = true
-            // setIsRead('unread')
-        } else {/*setIsRead ('read') ,*/ email.isRead = false}
-        await emailService.update(email)
+        await emailService.update({...email, isRead: !email.isRead})
+        await loadEmailes()
         countUnread()
     }
 
     async function onOpenMail(email){
         if (email.isRead === false){
             email.isRead = true
-        } await emailService.update(email)
+        } 
+        await emailService.update(email)
     }
 
     async function countUnread(){

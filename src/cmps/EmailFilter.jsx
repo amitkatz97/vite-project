@@ -16,9 +16,14 @@ export function EmailFilter({filterBy, onSetFilterBy}){
         // setFilterToEdit(prevFilter => ({...prevFilter, from: value}))
         // filtering with global field that change according to input "name" :
         let {value, name: field, type} =target
-        value = type ==='checkbox' ? true : value
+        if (field === 'isRead'){
+            if (value === 'true'){
+                value = true
+            } else if (value ==='false'){
+                value = false
+            }else value = null
+        }
         setFilterToEdit(prevFilter =>({...prevFilter, [field]:value}))
-        console.log(value)
     }
 
     function onSubmitFilter(ev){
@@ -40,11 +45,14 @@ export function EmailFilter({filterBy, onSetFilterBy}){
                 <label htmlFor="subject"> subject</label> <br />
                 <input onChange={handleChange} name="subject" id="subject" type="text" placeholder="Search by subject" value={subject} />
             </section>
-            {/* <section>
+            <section>
                 <label htmlFor="isRead"> Read / unread / all</label><br />
-                <input onChange={handleChange} name ="isRead" id= "isRead" type="checkbox" value={isRead}></input>
-            </section> */}
-            {/* <button>Submit</button> */}
+                <select onChange={handleChange} name ="isRead" id= "isRead">
+                    <option value="true">Read</option>
+                    <option value="false">Unread</option>
+                    <option value="null">All</option>
+                </select>
+            </section>
         </form>
     )
 }

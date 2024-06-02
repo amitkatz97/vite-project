@@ -10,7 +10,7 @@
         "aside main"
         "aside main"
         "footer footer";
-    background-color: rgb(174, 233, 233);
+    background-color: rgb(255, 255, 255);
 }
 
 .main-app .container{
@@ -22,7 +22,7 @@
 .main-app aside{
     border-radius: 2%;
     grid-area: aside;
-    background-color:rgb(217, 239, 239);
+    background-color:rgb(242, 242, 242);
 }
 
 .main-app footer{

@@ -2,9 +2,30 @@
 
 .email-index {
     background-color:  rgb(134, 238, 238);
-    display: flex;
+    display: grid;
+    grid-template-columns:  2fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+    "filter bar"
+    "list list";
     margin-left: 2px;
     flex-direction: column;
     padding-left: 0%;
     
+}
+
+.email-index .progress-bar{
+    grid-area: bar;
+    background-color: rgb(223, 242, 243);
+    margin-left: 2px;
+    margin-bottom: 5px;
+   
+}
+
+.email-index .email-filter{
+    grid-area: filter;
+}
+
+.email-index .email-list{
+    grid-area: list;
 }

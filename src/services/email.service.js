@@ -19,21 +19,18 @@ export const emailService ={
 _createEmailes()
 
 async function query (filterBy){
-    // console.log('filter by:', filterBy)
-    let emiles = await storageService.query(EMAIL_KEY)
+    console.log('filter by:', filterBy)
+    let emails = await storageService.query(EMAIL_KEY)
     if (filterBy){
-        let {from ="" , isStarred = false, isRead = false, subject =""} = filterBy
-        emiles = emiles.filter(emile =>
-            emile.from.toLowerCase().includes(from.toLowerCase()) &&
-            emile.subject.toLowerCase().includes(subject.toLowerCase()) 
-        )
+        let {from ="" , isStarred = false, isRead = null, subject =""} = filterBy
+        emails = emails.filter(email => _isMatchFilter(email, filterBy))
         // emiles = emiles.filter(emaile =>
         //     !emaile.isRead
         // )
     } 
     const startIdx = gPageIdx * PAGE_SIZE
-    emiles = emiles.slice(startIdx, startIdx + PAGE_SIZE)
-    return emiles
+    emails = emails.slice(startIdx, startIdx + PAGE_SIZE)
+    return emails
 }
 
 async function fullQuery (){
@@ -103,6 +100,30 @@ function _createEmailes(){
     return emailes
 }
 
+// return true if this email matches the given filter, false otherwise
+function _isMatchFilter(email, filterBy) {
+
+    const { from, subject, isRead } = filterBy
+
+    // from
+    if(! email.from.toLowerCase().includes(from.toLowerCase())) {
+        return false
+    }
+
+    // subject
+    if(!email.subject.toLowerCase().includes(subject.toLowerCase()) ) {
+        return false
+    }
+
+    // isRead
+    if(isRead !== null) {
+        if(email.isRead !== isRead) {
+            return false
+        }
+    }
+
+    return true
+}
 
 
 

@@ -4,8 +4,7 @@ export function AppHeader(){
     return (
         <>
         <header className = "app-header">
-            <img src ="src\assets\imgs\smallGmail.png"></img>
-            <h1>Gmail.com</h1>
+            <img className = "top-img" src ="src\assets\imgs\logo_gmail_lockup_.png"></img>
             <section className ="container">
         
                 <nav>

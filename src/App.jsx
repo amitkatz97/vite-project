@@ -5,6 +5,7 @@ import { Home } from "./pages/Home.jsx"
 import { About } from "./pages/About.jsx"
 import { EmailIndex } from "./pages/EmailIndex.jsx";
 import { EmaileDetailes } from './pages/EmaileDetailes.jsx';
+import { AsideMenu } from './pages/AsideMenu.jsx';
 
 
 
@@ -23,7 +24,7 @@ export function App() {
               </Routes>
             </main>
             <aside>
-              Here wiil be Folders
+              <AsideMenu/>
             </aside>
 
             <footer>

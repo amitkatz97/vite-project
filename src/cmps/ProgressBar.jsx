@@ -16,8 +16,8 @@ export function ProgressBar ({progress}) {
     }
 
     return (
-      <div style={{ width: '50%', margin: '20px auto' }}>
-        <div style={{ backgroundColor: '#f0f0f0', height: '20px', borderRadius: '10px' }}>
+      <div className="progress-bar" style={{ width: '100%' }}>
+        <div style={{ backgroundColor: '#f0f0f0', height: '20px', borderRadius: '10px'}}>
           <div
             style={{
               backgroundColor: '#3498db',
