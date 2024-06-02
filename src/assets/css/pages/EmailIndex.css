@@ -1,9 +1,10 @@
 
 
 .email-index {
-    background-color: rgb(245, 240, 234);
+    background-color:  rgb(134, 238, 238);
     display: flex;
-    margin-left: 10px;
+    margin-left: 2px;
     flex-direction: column;
+    padding-left: 0%;
     
 }

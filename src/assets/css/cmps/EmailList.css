@@ -12,14 +12,38 @@
 }
 
 .email-list table{
-    display: flex;
-    margin-left: 200px;
-    justify-content: space-between;
-    max-width: 650px;;
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "star from subject date but";
+    
 }
-
-.email-list :hover{
-    background-color: rgb(189, 234, 241);
+.email-list table .star{
+    grid-area: star;
+    margin-right: 5px;
+}
+.email-list table .from{
+    grid-area: from;
+    text-align: start;
+    
+}
+.email-list table .subject{
+    grid-area: subject;
+    text-align: start;
+}
+.email-list table .date{
+    grid-area: date;
+    text-align: start;
+}
+.email-list table .actions{
+    grid-area: but;
+}
+.email-list ul :hover{
+    transition: 0.5;
+    /* background-color: rgb(189, 234, 241); */
+    font-weight: bold;
+    transform: scale(1.008);
 }
 
 .email-list .emailes-actions{

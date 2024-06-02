@@ -39,11 +39,11 @@ export function EmailFilter({filterBy, onSetFilterBy}){
                 <label htmlFor="subject"> subject</label> <br />
                 <input onChange={handleChange} name="subject" id="subject" type="text" placeholder="Search by subject" value={subject} />
             </section>
-            <section>
-                <label htmlFor="isStarred"> Favotirs</label> <br />
+            {/* <section>
+                <label htmlFor="isStarred"> Favorits</label> <br />
                 <input onChange={handleChange} name ="isStarred" id= "isStarred" type="checkbox" value={isStarred}></input>
-            </section>
-            <button>Submit</button>
+            </section> */}
+            {/* <button>Submit</button> */}
         </form>
     )
 }

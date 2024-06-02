@@ -22,10 +22,13 @@ export function App() {
                 <Route path ="/emailes/:emaileId" element ={<EmaileDetailes />}/>
               </Routes>
             </main>
+            <aside>
+              Here wiil be Folders
+            </aside>
 
             <footer>
                 <section className="container">
-                    robotRights 2023 &copy;
+                    Email 2024, all rights reserved &copy;
                 </section>
             </footer>
         </section>

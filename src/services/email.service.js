@@ -2,7 +2,8 @@ import {storageService} from "./asynce-storage.service"
 import {utilService} from "./util.service"
 
 const EMAIL_KEY='emailesDB'
-
+const PAGE_SIZE = 11 
+var gPageIdx = 0
 
 export const emailService ={
     query,
@@ -10,21 +11,36 @@ export const emailService ={
     post,
     getById,
     getRandomFilter,
-    update
+    update,
+    nextPage
 }
 
 _createEmailes()
 
 async function query (filterBy){
+    // console.log('filter by:', filterBy)
     let emiles = await storageService.query(EMAIL_KEY)
     if (filterBy){
         let {from ="" , isStarred = false, isRead = false, subject =""} = filterBy
         emiles = emiles.filter(emile =>
             emile.from.toLowerCase().includes(from.toLowerCase()) &&
-            emile.subject.toLowerCase().includes(subject.toLowerCase()) //&&
-            // emile.isRead.includes(isRead)
+            emile.subject.toLowerCase().includes(subject.toLowerCase()) 
         )
-    } return emiles
+        emiles = emiles.filter(emaile =>
+            !emaile.isStarred
+        )
+    } 
+    const startIdx = gPageIdx * PAGE_SIZE
+    emiles = emiles.slice(startIdx, startIdx + PAGE_SIZE)
+    return emiles
+}
+
+async function nextPage(){
+    const emiles = await storageService.query(EMAIL_KEY)
+    gPageIdx++
+    if (gPageIdx * PAGE_SIZE >= emiles.length){
+        gPageIdx  =0
+    }
 }
 
 function remove(emailId){

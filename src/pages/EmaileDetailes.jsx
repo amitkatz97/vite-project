@@ -22,15 +22,15 @@ export function EmaileDetailes(){
     if(!email) return <div>Loading...</div>
     return (
         <>
-        <section className="email-details">
-            <h3>Subject : {email.subject}</h3>
-            <h4>From : {email.from}</h4>
-            <h4>sent at: {email.sentAt}</h4>
-            <p>{email.body}</p>
-            <h4></h4>
-        </section>
-
-        <Link to ="/emailes">Back</Link>
+        <div className="email-details">
+            <section>
+                <h3>Subject : {email.subject}</h3>
+                <h4>From : {email.from}</h4>
+                <h5>sent at: {email.sentAt}</h5>
+                <p>{email.body}</p>
+                <Link to ="/emailes">Back</Link>
+            </section>
+        </div>
         </>
     )
 }

@@ -11,4 +11,5 @@
 @import "pages/EmailIndex.css";
 @import "cmps/EmailPreview.css";
 @import "cmps/EmailFilter.css";
-@import "pages/App.css"
+@import "pages/App.css";
+@import "pages/EmaileDetailes.css"

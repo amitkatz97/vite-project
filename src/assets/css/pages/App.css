@@ -1,3 +1,32 @@
+
+
 .main-app{
-    background-color: rgb(198, 198, 245);
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto 1fr 1fr auto;
+    gap: 5px;
+    grid-template-areas: 
+        "header header"
+        "aside main"
+        "aside main"
+        "footer footer";
+    background-color: rgb(174, 233, 233);
+}
+
+.main-app .container{
+    grid-area: main;
+    padding-left: 5px;
+    padding-right: 2px;
+}
+
+.main-app aside{
+    border-radius: 2%;
+    grid-area: aside;
+    background-color:rgb(217, 239, 239);
+}
+
+.main-app footer{
+    justify-content: center;
+    align-content: center;
+    grid-area: footer;
 }

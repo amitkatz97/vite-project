@@ -49,24 +49,28 @@ export function EmailPreview({emaile, onRemoveEmail}){
 
     return(
         <>
-        <article className="emaile-preview">
-        <button className={starClass} onClick={() => onChangeStar()}>{isStarred}</button>
-            <Link to={`/emailes/${emaile.id}`} className={readClass} onClick={() => onOpenMail()}>
-            <section className="item1">
-                {emaile.from}
-            </section>
-            <section className="item2">
-                {emaile.subject}
-            </section>
-            <section className="item3">
-                {emaile.sentAt}
-            </section>
-            </Link>
-            <section className="actions">
-                <button className="item4" onClick={() => onRead()}>{isRead}</button>
-                <button onClick={() => onRemoveEmail(emaile.id)}>X</button>
-            </section>
-        </article>
+        <div className ={readClass}>
+            <article className="emaile-preview">
+            <button className={starClass} onClick={() => onChangeStar()}>{isStarred}</button>
+                <Link to={`/emailes/${emaile.id}`} onClick={() => onOpenMail()}>
+                <section className="item1">
+                    {emaile.from}
+                </section>
+                </Link>
+                <Link to={`/emailes/${emaile.id}`} onClick={() => onOpenMail()}>
+                <section className="item2">
+                    {emaile.subject}
+                </section>
+                </Link>
+                <section className="item3">
+                    {emaile.sentAt}
+                </section>
+                <section className="actions">
+                    <button className="item4" onClick={() => onRead()}>{isRead}</button>
+                    <button onClick={() => onRemoveEmail(emaile.id)}>X</button>
+                </section>
+            </article>
+        </div>
        
         </>
     )

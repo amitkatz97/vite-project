@@ -1,22 +1,28 @@
 
 
 .emaile-preview {
-    background-color:aliceblue;
-    display: flex;
-    flex-direction: row;
-    justify-content:space-between;
+    /* background-color:aliceblue; */
+    display: grid;
+    grid-template-columns: auto 1fr 1fr 1fr auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+    "star from subject date but";
+    /* justify-content:space-between; */
     border: solid 0.5px;
     align-items: center;
+    background-color: rgba(255, 228, 196, 0.205);
 }
 
-.emaile-preview a{
+
+/* .emaile-preview a{
     display:flex;
     width: 600px;
     align-items: center;
    
-}
+} */
 
 .emaile-preview button{
+    grid-area: star;
     margin: 8px;
     padding: 0%;
     height: fit-content;
@@ -24,42 +30,39 @@
 }
 
 .emaile-preview .item1{
-    /* background-color: rgb(235, 205, 205); */
-    max-inline-size: 270px;
-    min-inline-size: 270px;
+   grid-area: from;
+
 }
 
 .emaile-preview .item2{
-    /* background-color: rgb(182, 241, 192); */
-    max-inline-size: 250px;
-    min-inline-size: 250px;
+    grid-area: subject;
+    
 }
 
 .emaile-preview .item3{
-    /* background-color: rgb(231, 247, 206); */
-    margin-left: 100px;
-    max-inline-size: 150px;
-    min-inline-size: 150px;
+    grid-area: date;
 }
 
-.emaile-preview .item4{
-    /* background-color: rgb(170, 221, 230); */
+/* .emaile-preview .item4{
     max-inline-size: 100px;
     min-inline-size: 100px;
     justify-self: end;
-}
+}  */
 
 .emaile-preview .actions{
+    grid-area: but;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin: 2px;
 }
 
 .emaile-preview .actions button{
-margin: 4px;
+margin: 2px;
 }
 
 .read {
-    background-color: brown;
+    background-color: rgb(152, 219, 174);
+    opacity: 60%;
 }
 
 .unread {
