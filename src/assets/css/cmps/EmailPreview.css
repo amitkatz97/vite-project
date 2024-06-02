@@ -3,10 +3,10 @@
 .emaile-preview {
     /* background-color:aliceblue; */
     display: grid;
-    grid-template-columns: auto 1fr 1fr 1fr auto;
+    grid-template-columns: auto 1fr 1fr 1fr;
     grid-template-rows: auto;
     grid-template-areas:
-    "star from subject date but";
+    "star from subject date";
     /* justify-content:space-between; */
     border: solid 0.5px;
     align-items: center;
@@ -50,7 +50,7 @@
 }  */
 
 .emaile-preview .actions{
-    grid-area: but;
+    grid-area: date;
     display: flex;
     flex-direction: row;
     margin: 2px;

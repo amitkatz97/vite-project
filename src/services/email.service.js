@@ -12,7 +12,8 @@ export const emailService ={
     getById,
     getRandomFilter,
     update,
-    nextPage
+    nextPage,
+    fullQuery
 }
 
 _createEmailes()
@@ -26,12 +27,18 @@ async function query (filterBy){
             emile.from.toLowerCase().includes(from.toLowerCase()) &&
             emile.subject.toLowerCase().includes(subject.toLowerCase()) 
         )
-        emiles = emiles.filter(emaile =>
-            !emaile.isStarred
-        )
+        // emiles = emiles.filter(emaile =>
+        //     !emaile.isRead
+        // )
     } 
     const startIdx = gPageIdx * PAGE_SIZE
     emiles = emiles.slice(startIdx, startIdx + PAGE_SIZE)
+    return emiles
+}
+
+async function fullQuery (){
+    // console.log('filter by:', filterBy)
+    let emiles = await storageService.query(EMAIL_KEY)
     return emiles
 }
 

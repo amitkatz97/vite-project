@@ -18,6 +18,14 @@ export function EmaileDetailes(){
         setEmail(email)
     }
 
+    async function onRemoveEmail(){
+         try{
+              await emailService.remove(params.emaileId)
+        } catch (error){
+            console.log("Cant delete this email because:", error)
+        }
+     }
+
 
     if(!email) return <div>Loading...</div>
     return (
@@ -28,7 +36,9 @@ export function EmaileDetailes(){
                 <h4>From : {email.from}</h4>
                 <h5>sent at: {email.sentAt}</h5>
                 <p>{email.body}</p>
-                <Link to ="/emailes">Back</Link>
+                <Link to ="/emailes">Back ✉</Link>
+                <Link className="delete" to ="/emailes" onClick={onRemoveEmail}> Delete Emaile ♲</Link>
+                
             </section>
         </div>
         </>

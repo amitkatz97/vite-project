@@ -4,6 +4,7 @@ import { emailService } from "../services/email.service"
 export function EmailFilter({filterBy, onSetFilterBy}){
 
     const [filterToEdit, setFilterToEdit] = useState(filterBy)
+    const [showRead , setShowRead] = useState(false)
 
     useEffect(()=> {
         onSetFilterBy(filterToEdit)
@@ -15,7 +16,7 @@ export function EmailFilter({filterBy, onSetFilterBy}){
         // setFilterToEdit(prevFilter => ({...prevFilter, from: value}))
         // filtering with global field that change according to input "name" :
         let {value, name: field, type} =target
-        // value = type ==='checkbox' ? true : value
+        value = type ==='checkbox' ? true : value
         setFilterToEdit(prevFilter =>({...prevFilter, [field]:value}))
         console.log(value)
     }
@@ -28,7 +29,7 @@ export function EmailFilter({filterBy, onSetFilterBy}){
     }
 
 
-    const {from , isStarred, subject} = filterToEdit
+    const {from , isRead, subject} = filterToEdit
     return(
         <form onSubmit={onSubmitFilter} className="email-filter">
             <section>
@@ -40,8 +41,8 @@ export function EmailFilter({filterBy, onSetFilterBy}){
                 <input onChange={handleChange} name="subject" id="subject" type="text" placeholder="Search by subject" value={subject} />
             </section>
             {/* <section>
-                <label htmlFor="isStarred"> Favorits</label> <br />
-                <input onChange={handleChange} name ="isStarred" id= "isStarred" type="checkbox" value={isStarred}></input>
+                <label htmlFor="isRead"> Read / unread / all</label><br />
+                <input onChange={handleChange} name ="isRead" id= "isRead" type="checkbox" value={isRead}></input>
             </section> */}
             {/* <button>Submit</button> */}
         </form>

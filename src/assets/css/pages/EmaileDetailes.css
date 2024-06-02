@@ -7,7 +7,7 @@
         "subject subject"
         "from sentAt "
         "main main"
-        ". back";
+        "delete back";
 }
 
 .email-details h3{
@@ -39,4 +39,11 @@
     font-weight: bold;
     grid-area: back;
     text-align: end;
+}
+
+.email-details .delete{
+    grid-area: delete;
+    text-align: start;
+    font-weight: bold;
+
 }

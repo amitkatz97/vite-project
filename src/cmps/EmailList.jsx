@@ -1,6 +1,6 @@
 import { EmailPreview } from "./EmailPreview.jsx"
 
-export function EmailList({emails , onRemoveEmail, onNextPage}){
+export function EmailList({emails , onRemoveEmail, onNextPage , onRead, onOpenMail}){
 
     return(
         <>
@@ -11,12 +11,11 @@ export function EmailList({emails , onRemoveEmail, onNextPage}){
                 <th className="from">From</th>
                 <th className="subject">Subject</th>
                 <th className="date">Date</th>
-                <th className="actions">actions</th>
             </table>
                 <ul>
                     {emails.map(emaile => 
                         <li key ={emaile.id}>
-                            <EmailPreview emaile ={emaile}  onRemoveEmail = {onRemoveEmail}/> 
+                            <EmailPreview emaile ={emaile}  onRemoveEmail = {onRemoveEmail} onRead={onRead} onOpenMail={onOpenMail}/> 
                         </li>
                     )}
                 </ul>
