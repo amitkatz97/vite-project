@@ -81,14 +81,7 @@ export function EmailIndex(){
     }
 
     async function countUnread(){
-        console.log("Counter is down")
-        const emaileFullList = await emailService.fullQuery()
-        var unreadList = []
-        emaileFullList.map(emaile => {
-            if (emaile.isRead === false)(
-                unreadList.push(emaile)
-            )
-        })
+        const unreadList =  await emailService.getUnreadEmails()
         setUnReadEmailCount(unreadList.length)
         console.log(unReadEmailCount)
         return unreadList.length

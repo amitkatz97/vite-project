@@ -13,7 +13,8 @@ export const emailService ={
     getRandomFilter,
     update,
     nextPage,
-    fullQuery
+    fullQuery,
+    getUnreadEmails
 }
 
 _createEmailes()
@@ -70,8 +71,19 @@ function getRandomFilter(){
         from : "",
         subject:"",
         isStarred: false,
-        isRead: false
+        isRead: null
     }
+}
+
+async function getUnreadEmails(){
+    const emaileFullList = await emailService.fullQuery()
+    var unreadList = []
+        emaileFullList.map(emaile => {
+            if (emaile.isRead === false)(
+                unreadList.push(emaile)
+            )
+        })
+        return unreadList
 }
 
 

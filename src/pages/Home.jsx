@@ -5,7 +5,7 @@ export function Home (){
         <>
     <h1>Hey!</h1>
     <h2>Welcon to Gmail</h2>
-    <img src="src\assets\imgs\gmailEnternce.png"></img>
+    <img src="vite-project\src\assets\imgs\gmailEnternce.png"></img>
     </>
     )
 }

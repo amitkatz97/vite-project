@@ -4,6 +4,7 @@ export function AsideMenu(){
     return(
         <>
         <h1>Here will be Folders</h1>
+        <br />
         <nav>
             <NavLink to ='/'>Home</NavLink>
                 
