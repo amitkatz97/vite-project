@@ -65,7 +65,11 @@ export function EmailIndex(){
         loadEmailes()
     }
 
-    
+    async function onChangeStar(email){
+        await emailService.update({...email, isStarred: !email.isStarred})
+        console.log(email.isStarred)
+        await loadEmailes()
+    }
 
     async function onRead(email){
         await emailService.update({...email, isRead: !email.isRead})
@@ -94,7 +98,7 @@ export function EmailIndex(){
         <div className="email-index">
             <ProgressBar progress={unReadEmailCount}/>
             <EmailFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy}/> 
-            <EmailList emails = {emails} onRemoveEmail={onRemoveEmail} onNextPage={onNextPage} onRead={onRead} onOpenMail={onOpenMail}/*onChangeStar={onChangeStar} isStarred={isStarred}*//>
+            <EmailList emails = {emails} onRemoveEmail={onRemoveEmail} onNextPage={onNextPage} onRead={onRead} onOpenMail={onOpenMail} onChangeStar={onChangeStar}/*onChangeStar={onChangeStar} isStarred={isStarred}*//>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import {storageService} from "./asynce-storage.service"
 import {utilService} from "./util.service"
 
 const EMAIL_KEY='emailesDB'
-const PAGE_SIZE = 11 
+const PAGE_SIZE = 16 
 var gPageIdx = 0
 
 export const emailService ={
@@ -14,13 +14,14 @@ export const emailService ={
     update,
     nextPage,
     fullQuery,
-    getUnreadEmails
+    getUnreadEmails,
+    gPageIdx
 }
 
 _createEmailes()
 
 async function query (filterBy){
-    console.log('filter by:', filterBy)
+    // console.log('filter by:', filterBy)
     let emails = await storageService.query(EMAIL_KEY)
     if (filterBy){
         let {from ="" , isStarred = false, isRead = null, subject =""} = filterBy
@@ -46,6 +47,8 @@ async function nextPage(){
     if (gPageIdx * PAGE_SIZE >= emiles.length){
         gPageIdx  =0
     }
+
+    return gPageIdx
 }
 
 function remove(emailId){
@@ -104,7 +107,7 @@ function _createEmail(){
 
 function _createEmailes(){
     const emailes =[]
-    for( var i = 0; i <25; i++){
+    for( var i = 0; i <35; i++){
         emailes.push(_createEmail())
     }
     console.log('emiles are set')

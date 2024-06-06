@@ -5,46 +5,8 @@ import { emailService } from "../services/email.service"
 
 const {useState , useEffect} =React
 
-export function EmailPreview({emaile, onRemoveEmail, onRead, onOpenMail}){
-
-    const [isStarred, setIsStarred] = useState('☆')
-    // const [isRead, setIsCurrRead] = useState("read")
+export function EmailPreview({emaile, onRemoveEmail, onRead, onOpenMail, onChangeStar}){
     const [isHovered , setIsHovered] = useState(false)
-
-    // useEffect(() =>{
-    //     setIsRead(isRead)
-    // }, [readClass])
-
-    var starClass = isStarred //emaile.isStarred ? '☆' : '★'
-    
-
-    async function onChangeStar(){
-        if (isStarred === '☆' ){
-            emaile.isStarred = true
-            setIsStarred('★')
-        } else {setIsStarred ('☆') , emaile.isStarred = false}
-        await emailService.update(emaile)
-        console.log(isStarred)
-        console.log(emaile.isStarred)
-    }
-    
-
-    // async function onRead(){
-    //     if (isRead === 'read'){
-    //         emaile.isRead = true
-    //         setIsRead('unread')
-    //     } else {setIsRead ('read') , emaile.isRead = false}
-    //     await emailService.update(emaile)
-    //     console.log(isRead)
-    // }
-
-    // async function onOpenMail(){
-    //     if (isRead === 'read'){
-    //         emaile.isRead = true
-    //         setIsCurrRead('unread')
-    //     } await emailService.update(emaile)
-    //     console.log(isRead)
-    // }
 
     const handleMouseEnter = () =>{
         setIsHovered(true)
@@ -53,18 +15,15 @@ export function EmailPreview({emaile, onRemoveEmail, onRead, onOpenMail}){
     const handleMouseLeave = () =>{
         setIsHovered(false)
     }
-
-
+    var starDisplay = emaile.isStarred ? '★' : '☆'
     var readClass = emaile.isRead ? 'read' : 'unread'
     var emaileState = emaile.isRead ? 'unread' : 'read'
-
-    
 
     return(
         <>
         <div className ={readClass}>
             <article className="emaile-preview" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <button className={starClass} onClick={() => onChangeStar()}>{isStarred}</button>
+            <button onClick={() => onChangeStar(emaile)}>{starDisplay}</button>
                 <Link to={`/emailes/${emaile.id}`} onClick={() => onOpenMail(emaile)}>
                 <section className="item1">
                     {emaile.from}

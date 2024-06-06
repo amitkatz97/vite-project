@@ -10,7 +10,6 @@
     /* justify-content:space-between; */
     border: solid 0.5px;
     align-items: center;
-    background-color: rgba(255, 228, 196, 0.205);
 }
 
 
@@ -61,10 +60,10 @@ margin: 2px;
 }
 
 .read {
-    background-color: rgb(152, 219, 174);
+    background-color: #c9def1;
     opacity: 60%;
 }
 
 .unread {
-    background-color:aliceblue; ;
+    background-color:rgb(255, 255, 255); ;
 }
