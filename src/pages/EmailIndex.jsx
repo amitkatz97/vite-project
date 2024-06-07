@@ -3,18 +3,24 @@ import { emailService } from "../services/email.service.js"
 import { useEffect, useState } from "react"
 import { EmailFilter } from "../cmps/EmailFilter.jsx"
 import { ProgressBar } from "../cmps/ProgressBar.jsx"
+import { AsideMenu } from "./AsideMenu.jsx"
+import { EmailSort } from "../cmps/EmailSort.jsx"
+import { Link, NavLink, useNavigate, useSearchParams, useParams } from "react-router-dom";
 
 
 export function EmailIndex(){
+    const params = useParams()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     const [emails, setEmails] = useState()
-    const [filterBy, setFilterBy] = useState(emailService.getRandomFilter())
+    const [sortBy, setSortBy] = useState(emailService.getDefaultSort())
+    const [filterBy, setFilterBy] = useState(emailService.getFilterFromSearchParams(searchParams, params.folder))
     const [unReadEmailCount, setUnReadEmailCount] = useState(emailService.fullQuery.length)
-    // const [isStarred, setIsStarred] = useState('☆')
 
     useEffect(()=> {
+        setSearchParams(filterBy)
         loadEmailes()
-    }, [filterBy])
+    }, [filterBy, params.folder, sortBy])
 
     useEffect(() =>{
         countUnread()
@@ -25,7 +31,7 @@ export function EmailIndex(){
     async function loadEmailes(){
         try {
             console.log('Render')
-            const emailesList = await emailService.query(filterBy)
+            const emailesList = await emailService.query(filterBy, sortBy)
             setEmails(emailesList)
         } catch (error){
             console.log("Having issues woth loading emailes", error)
@@ -36,6 +42,10 @@ export function EmailIndex(){
         setFilterBy(prevFilter => ({...prevFilter,...filterBy}))
     }
 
+    function onSetSortBy(sortBy){
+        setSortBy(sortBy)
+    }
+
     async function onRemoveEmail(emailId){
         try{
             await emailService.remove(emailId)
@@ -44,21 +54,6 @@ export function EmailIndex(){
             console.log("Cant delete this email because:", error)
         }
     }
-
-    // async function onChangeStar(emaile, isStarred){
-    //     if (!emaile.isStarred){
-    //         emaile.isStarred = true
-    //         isStarred = '★'
-    //         // setIsStarred('★') 
-    //     } else if (emaile.isStarred){
-    //         emaile.isStarred = false
-    //         isStarred = '☆'
-    //         // setIsStarred('☆') 
-    //     }
-    //     await emailService.update(emaile)
-    //     // console.log(isStarred)
-    //     console.log(emaile.isStarred)
-    // }
 
     async function onNextPage(){
         await emailService.nextPage()
@@ -96,7 +91,9 @@ export function EmailIndex(){
     if (!emails) return <div>Loading..</div>
     return (
         <div className="email-index">
+            <AsideMenu filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
             <ProgressBar progress={unReadEmailCount}/>
+            <EmailSort sortBy={sortBy} onSetSortBy={onSetSortBy}/>
             <EmailFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy}/> 
             <EmailList emails = {emails} onRemoveEmail={onRemoveEmail} onNextPage={onNextPage} onRead={onRead} onOpenMail={onOpenMail} onChangeStar={onChangeStar}/*onChangeStar={onChangeStar} isStarred={isStarred}*//>
         </div>

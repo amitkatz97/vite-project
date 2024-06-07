@@ -20,7 +20,7 @@ export function AppHeader(){
                 
                 <NavLink to ='/about'> About</NavLink>
                 
-                <NavLink to ='/emailes'> Email</NavLink>
+                <NavLink to ='/emailes/inbox'> Email</NavLink>
                 </nav>
 
             </section>

@@ -4,6 +4,10 @@ import {utilService} from "./util.service"
 const EMAIL_KEY='emailesDB'
 const PAGE_SIZE = 16 
 var gPageIdx = 0
+const loggedInUser = {
+    email: 'Amit@Reemon.com',
+    fullName: 'Amit Katz',
+}
 
 export const emailService ={
     query,
@@ -15,21 +19,20 @@ export const emailService ={
     nextPage,
     fullQuery,
     getUnreadEmails,
-    gPageIdx
+    gPageIdx,
+    getFolders,
+    getLoggedUser,
+    getFilterFromSearchParams,
+    getDefaultSort,
 }
 
 _createEmailes()
 
-async function query (filterBy){
+async function query (filterBy, sortBy = getDefaultSort()){
     // console.log('filter by:', filterBy)
     let emails = await storageService.query(EMAIL_KEY)
-    if (filterBy){
-        let {from ="" , isStarred = false, isRead = null, subject =""} = filterBy
-        emails = emails.filter(email => _isMatchFilter(email, filterBy))
-        // emiles = emiles.filter(emaile =>
-        //     !emaile.isRead
-        // )
-    } 
+    emails = _filterEmails(emails, filterBy)
+    _sortEmailes(emails, sortBy)
     const startIdx = gPageIdx * PAGE_SIZE
     emails = emails.slice(startIdx, startIdx + PAGE_SIZE)
     return emails
@@ -69,13 +72,82 @@ function getById(id) {
     return storageService.get(EMAIL_KEY, id)
 }
 
+
+
+function getLoggedUser() {
+    return loggedInUser
+}
+
+function getFolders(){
+    return [
+        {
+            path: 'inbox',
+            icon: 'inbox',
+            name: 'Inbox'
+        },
+        {
+            path: 'starred',
+            icon: 'star',
+            name: 'Starred'
+        },
+        {
+            path: 'sent',
+            icon: 'send',
+            name: 'Sent'
+        },
+        {
+            path: 'draft',
+            icon: 'draft',
+            name: 'Drafts'
+        },
+        {
+            path: 'trash',
+            icon: 'Delete',
+            name: 'Deleted'
+        },
+
+    ]
+}
+
+function getDefaultSort(){
+    return {
+        by: 'date',
+        dir: 1
+    }
+}
+
+function _sortEmailes(emailes, sortBy){
+    if (sortBy.by === 'date'){
+        emailes.sort((mail1, mail2) => (mail2.sentAt - mail1.sentAt) * sortBy.dir)
+    } else if (sortBy.by ==='starred'){
+        emailes.sort((mail1, mail2) => (mail2.isStarred- mail1.isStarred) * sortBy.dir)
+    } else if (sortBy.by ==='isRead'){
+        emailes.sort((mail1, mail2) => (mail2.isRead - mail1.isRead) * sortBy.dir)
+    }
+}
+
 function getRandomFilter(){
     return{
+        status: 'inbox',
         from : "",
         subject:"",
-        isStarred: false,
-        isRead: null
+        isStarred: null,
+        isRead: null,
+        to: ""
     }
+}
+
+
+function getFilterFromSearchParams(searchParams, folder){
+    const filterBy ={
+        status: folder,
+        isRead: JSON.parse(searchParams.get('isRead')),
+        isStarred: JSON.parse(searchParams.get('isStarred')) || null,
+        from: searchParams.get('from') || '',
+        subject: searchParams.get('subject') || '',
+        to: searchParams.get('to') || ''
+    }
+    return filterBy
 }
 
 async function getUnreadEmails(){
@@ -97,9 +169,24 @@ function _createEmail(){
         body: utilService.makeLorem(),
         isRead : false,
         isStarred: false,
-        sentAt: "21.04.2024",
+        sentAt: utilService.getRandomIntInclusive(100000, Date.now()),
         removeAt: null,
         from: utilService.getRandomEmail(),
+        to: 'Amit@Reemon.com'
+    }
+    return email
+}
+
+function _createSendEmail(){
+    const email={
+        id :utilService.makeId(),
+        subject: utilService.makeShortLorem(),
+        body: utilService.makeLorem(),
+        isRead : true,
+        isStarred: false,
+        sentAt: utilService.getRandomIntInclusive(100000, Date.now()),
+        removeAt: null,
+        from: 'Amit@Reemon.com',
         to: utilService.getRandomEmail()
     }
     return email
@@ -110,6 +197,9 @@ function _createEmailes(){
     for( var i = 0; i <35; i++){
         emailes.push(_createEmail())
     }
+    for( var i = 0; i <10; i++){
+        emailes.push(_createSendEmail())
+    }
     console.log('emiles are set')
     utilService.saveToStorage(EMAIL_KEY,emailes)
     return emailes
@@ -118,27 +208,69 @@ function _createEmailes(){
 // return true if this email matches the given filter, false otherwise
 function _isMatchFilter(email, filterBy) {
 
-    const { from, subject, isRead } = filterBy
-
+    const { from, subject, isRead , to, isStarred} = filterBy
     // from
     if(! email.from.toLowerCase().includes(from.toLowerCase())) {
         return false
     }
-
     // subject
     if(!email.subject.toLowerCase().includes(subject.toLowerCase()) ) {
         return false
     }
-
+    //to
+    if(!email.to.toLowerCase().includes(to.toLowerCase())){
+        return false
+    }
     // isRead
     if(isRead !== null) {
         if(email.isRead !== isRead) {
             return false
         }
     }
-
+    //isStrread
+    if(isStarred !== null){
+        if(email.isStarred !== isStarred){
+            return false
+        }
+    }
     return true
 }
 
+function _filterEmails(emails, filterBy) {
+    if (filterBy.status) {
+        emails = _filterMailsByFolder(emails, filterBy.status)
+    }
+    if (filterBy.from) {
+        const regExp = new RegExp(filterBy.from, 'i')
+        emails = emails.filter(mail => regExp.test(mail.subject) || regExp.test(mail.body) || regExp.test(mail.from))
+    }
+    if (filterBy.isRead !== null && filterBy.isRead !== undefined) {
+        emails = emails.filter(mail => mail.isRead === filterBy.isRead)
+    }
+    return emails
+
+}
+
+function _filterMailsByFolder(emails, folder) {
+    switch (folder) {
+        case 'inbox':
+            emails = emails.filter(email => (email.to === loggedInUser.email) && !email.removedAt && !email.isDraft)
+            break
+        case 'sent':
+            emails = emails.filter(email => (email.from === loggedInUser.email) && !email.removedAt && !email.isDraft)
+            break
+        case 'starred':
+            emails = emails.filter(email => email.isStarred && !email.removedAt && !email.isDraft)
+            break
+        case 'trash':
+            emails = emails.filter(email => email.removedAt)
+            break
+        case 'draft':
+            emails = emails.filter(email => !email.sentAt && !email.removedAt)
+            break
+    }
+
+    return emails
+}
 
 

@@ -2,14 +2,14 @@
 
 .main-app{
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr;
     grid-template-rows: auto 1fr 1fr auto;
     gap: 5px;
     grid-template-areas: 
-        "header header"
-        "aside main"
-        "aside main"
-        "footer footer";
+        "header"
+        "main"
+        "main"
+        "footer";
     background-color: rgb(255, 255, 255);
 }
 

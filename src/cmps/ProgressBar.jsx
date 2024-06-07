@@ -11,7 +11,6 @@ export function ProgressBar ({progress}) {
 
     async function Init(){
         let totalEmails = await emailService.fullQuery()
-        console.log(totalEmails.length)
         onSetBar(totalEmails.length)
     }
 

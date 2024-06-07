@@ -1,17 +1,17 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState } from 'react'; 
+import { EmailFolderList } from "../cmps/EmailFoldersList";
 
-export function AsideMenu(){
+
+export function AsideMenu({filterBy, onSetFilterBy}){
+    const navigate = useNavigate()
     return(
         <>
-        <h1>Here will be Folders</h1>
-        <br />
-        <nav>
-            <NavLink to ='/'>Home</NavLink>
-                
-            <NavLink to ='/about'> About</NavLink>
-                
-            <NavLink to ='/emailes'> Email</NavLink>
-        </nav>
+        <section className="email-asdie-menu">
+            <h1>Here will be Compose</h1>
+            <br />
+            <EmailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} navigate={navigate}/>
+        </section>
         </>
     )
 }

@@ -34,10 +34,11 @@ export function EmaileDetailes(){
             <section>
                 <h3>Subject : {email.subject}</h3>
                 <h4>From : {email.from}</h4>
+                {/* <h4>to: {email.to}</h4> */}
                 <h5>sent at: {email.sentAt}</h5>
                 <p>{email.body}</p>
-                <Link to ="/emailes">Back ✉</Link>
-                <Link className="delete" to ="/emailes" onClick={onRemoveEmail}> Delete Emaile ♲</Link>
+                <Link to ="/emailes/inbox">Back ✉</Link>
+                <Link className="delete" to ="/emailes/inbox" onClick={onRemoveEmail}> Delete Emaile ♲</Link>
                 
             </section>
         </div>

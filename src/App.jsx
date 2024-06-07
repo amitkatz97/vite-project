@@ -19,14 +19,10 @@ export function App() {
               <Routes>
                 <Route path= "/" element={<Home />}/>
                 <Route path= "/about" element={<About />}/>
-                <Route path= "/emailes" element={<EmailIndex />}/>
-                <Route path ="/emailes/:emaileId" element ={<EmaileDetailes />}/>
+                <Route path= "/emailes/:folder" element={<EmailIndex />}/>
+                <Route path ="/emailes/:folder/:emaileId" element ={<EmaileDetailes />}/>
               </Routes>
             </main>
-            <aside>
-              <AsideMenu/>
-            </aside>
-
             <footer>
                 <section className="container">
                     Email 2024, all rights reserved &copy;

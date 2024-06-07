@@ -4,7 +4,10 @@ export const utilService = {
     loadFromStorage,
     getRandomEmail,
     makeLorem,
-    makeShortLorem
+    makeShortLorem,
+    getRandomIntInclusive,
+    formatMailDate,
+    padNum
 }
 
 function makeId(length = 5) {
@@ -65,4 +68,33 @@ function makeShortLorem(size = 5){
         if (size >= 1) subject += ' '
     }
     return subject
+}
+
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+function padNum(num) {
+    return num > 9 ? num + '' : '0' + num
+}
+
+function formatMailDate(timeStamp) {
+    const date = new Date(timeStamp)
+    const sentYear = date.getFullYear()
+    const currYear = new Date().getFullYear()
+    if (currYear > sentYear) {
+        const yy = date.getFullYear().toString().slice(2)
+        let mm = padNum(date.getMonth() + 1) // months start at 0!
+        let dd = padNum(date.getDate())
+
+        return dd + '/' + mm + '/' + yy
+    }
+    return getMonthShortName(date.getMonth()) + ' ' + date.getDate()
+}
+function getMonthShortName(monthNum) {
+    const date = new Date()
+    date.setMonth(monthNum)
+    return date.toLocaleString('en-US', { month: 'short' })
 }

@@ -8,8 +8,6 @@ export function EmailList({emails , onRemoveEmail, onNextPage , onRead, onOpenMa
 
 
     useEffect(() => {
-        console.log(emailService.gPageIdx)
-        console.log(pageNum)
         setPageNum(emailService.gPageIdx +1)
     }, [pageNum])
 

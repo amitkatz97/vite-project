@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { utilService } from "../services/util.service"
 
 import { emailService } from "../services/email.service"
 
@@ -15,6 +16,10 @@ export function EmailPreview({emaile, onRemoveEmail, onRead, onOpenMail, onChang
     const handleMouseLeave = () =>{
         setIsHovered(false)
     }
+    function getDateText(ms) {
+        return utilService.formatMailDate(ms)
+    }
+
     var starDisplay = emaile.isStarred ? '★' : '☆'
     var readClass = emaile.isRead ? 'read' : 'unread'
     var emaileState = emaile.isRead ? 'unread' : 'read'
@@ -24,12 +29,12 @@ export function EmailPreview({emaile, onRemoveEmail, onRead, onOpenMail, onChang
         <div className ={readClass}>
             <article className="emaile-preview" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <button onClick={() => onChangeStar(emaile)}>{starDisplay}</button>
-                <Link to={`/emailes/${emaile.id}`} onClick={() => onOpenMail(emaile)}>
+                <Link to={`/emailes/inbox/${emaile.id}`} onClick={() => onOpenMail(emaile)}>
                 <section className="item1">
                     {emaile.from}
                 </section>
                 </Link>
-                <Link to={`/emailes/${emaile.id}`} onClick={() => onOpenMail(emaile)}>
+                <Link to={`/emailes/inbox/${emaile.id}`} onClick={() => onOpenMail(emaile)}>
                 <section className="item2">
                     {emaile.subject}
                 </section>
@@ -37,7 +42,7 @@ export function EmailPreview({emaile, onRemoveEmail, onRead, onOpenMail, onChang
                 <div>
                     {!isHovered ?( 
                     <section className="item3">
-                        {emaile.sentAt}
+                        {getDateText(emaile.sentAt)}
                     </section>
                     ) : (
                     <section className="actions">
