@@ -9,6 +9,7 @@ export function EmaileDetailes(){
     const params = useParams()
 
     useEffect(()=> {
+        console.log(params)
         loadEmaile()}, [params.emaileId]
     )
 

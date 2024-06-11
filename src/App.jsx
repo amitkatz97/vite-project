@@ -6,6 +6,7 @@ import { About } from "./pages/About.jsx"
 import { EmailIndex } from "./pages/EmailIndex.jsx";
 import { EmaileDetailes } from './pages/EmaileDetailes.jsx';
 import { AsideMenu } from './pages/AsideMenu.jsx';
+import {EmailCompose} from "./cmps/EmailCompose.jsx"
 
 
 
@@ -19,8 +20,10 @@ export function App() {
               <Routes>
                 <Route path= "/" element={<Home />}/>
                 <Route path= "/about" element={<About />}/>
-                <Route path= "/emailes/:folder" element={<EmailIndex />}/>
-                <Route path ="/emailes/:folder/:emaileId" element ={<EmaileDetailes />}/>
+                <Route path= "/emailes/:folder" element={<EmailIndex />} >
+                  <Route path ="/emailes/:folder/:emaileId" element ={<EmaileDetailes />}/>
+                  <Route path = "/emailes/:folder/edit/:emaileId?"element={<EmailCompose />} />
+                </Route>
               </Routes>
             </main>
             <footer>

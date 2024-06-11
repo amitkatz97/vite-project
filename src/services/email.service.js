@@ -24,6 +24,7 @@ export const emailService ={
     getLoggedUser,
     getFilterFromSearchParams,
     getDefaultSort,
+    createEmptyEmail,
 }
 
 _createEmailes()
@@ -56,6 +57,7 @@ async function nextPage(){
 
 function remove(emailId){
     return storageService.remove(EMAIL_KEY, emailId)
+    
 }
 function post (EMAIL_KEY , obj){
     return storageService.post(EMAIL_KEY, obj)
@@ -145,7 +147,8 @@ function getFilterFromSearchParams(searchParams, folder){
         isStarred: JSON.parse(searchParams.get('isStarred')) || null,
         from: searchParams.get('from') || '',
         subject: searchParams.get('subject') || '',
-        to: searchParams.get('to') || ''
+        to: searchParams.get('to') || '',
+        removeAt: searchParams.get('removeAt') || " "
     }
     return filterBy
 }
@@ -159,6 +162,21 @@ async function getUnreadEmails(){
             )
         })
         return unreadList
+}
+
+function createEmptyEmail(){
+    const email= {
+        id :utilService.makeId(),
+        subject: '',
+        body: '',
+        isRead : false,
+        isStarred: false,
+        sentAt: '',
+        removeAt: null,
+        from: 'Amit@Reemon.com',
+        to: ''
+    }
+    return email
 }
 
 
@@ -254,19 +272,19 @@ function _filterEmails(emails, filterBy) {
 function _filterMailsByFolder(emails, folder) {
     switch (folder) {
         case 'inbox':
-            emails = emails.filter(email => (email.to === loggedInUser.email) && !email.removedAt && !email.isDraft)
+            emails = emails.filter(email => (email.to === loggedInUser.email) && !email.removeAt && !email.isDraft)
             break
         case 'sent':
-            emails = emails.filter(email => (email.from === loggedInUser.email) && !email.removedAt && !email.isDraft)
+            emails = emails.filter(email => (email.from === loggedInUser.email) && !email.removeAt && !email.isDraft)
             break
         case 'starred':
-            emails = emails.filter(email => email.isStarred && !email.removedAt && !email.isDraft)
+            emails = emails.filter(email => email.isStarred && !email.removeAt && !email.isDraft)
             break
         case 'trash':
-            emails = emails.filter(email => email.removedAt)
+            emails = emails.filter(email => email.removeAt)
             break
         case 'draft':
-            emails = emails.filter(email => !email.sentAt && !email.removedAt)
+            emails = emails.filter(email => !email.sentAt && !email.removeAt)
             break
     }
 

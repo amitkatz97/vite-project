@@ -5,7 +5,7 @@ import { EmailFilter } from "../cmps/EmailFilter.jsx"
 import { ProgressBar } from "../cmps/ProgressBar.jsx"
 import { AsideMenu } from "./AsideMenu.jsx"
 import { EmailSort } from "../cmps/EmailSort.jsx"
-import { Link, NavLink, useNavigate, useSearchParams, useParams } from "react-router-dom";
+import { Link, NavLink, useNavigate, useSearchParams, useParams, Outlet } from "react-router-dom";
 
 
 export function EmailIndex(){
@@ -46,13 +46,19 @@ export function EmailIndex(){
         setSortBy(sortBy)
     }
 
-    async function onRemoveEmail(emailId){
+    async function onRemoveEmail(email){
         try{
-            await emailService.remove(emailId)
-            loadEmailes()
+            if (email.removeAt === null) {
+                await emailService.update({...email, removeAt: Date.now()})
+                console.log("Moved to trash")
+            } else {
+                await emailService.remove(email.id)
+                console.log("succed deleting")
+            }
         } catch (error){
             console.log("Cant delete this email because:", error)
         }
+        await loadEmailes()
     }
 
     async function onNextPage(){
@@ -62,7 +68,6 @@ export function EmailIndex(){
 
     async function onChangeStar(email){
         await emailService.update({...email, isStarred: !email.isStarred})
-        console.log(email.isStarred)
         await loadEmailes()
     }
 
@@ -95,7 +100,8 @@ export function EmailIndex(){
             <ProgressBar progress={unReadEmailCount}/>
             <EmailSort sortBy={sortBy} onSetSortBy={onSetSortBy}/>
             <EmailFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy}/> 
-            <EmailList emails = {emails} onRemoveEmail={onRemoveEmail} onNextPage={onNextPage} onRead={onRead} onOpenMail={onOpenMail} onChangeStar={onChangeStar}/*onChangeStar={onChangeStar} isStarred={isStarred}*//>
+            <EmailList emails = {emails} onRemoveEmail={onRemoveEmail} onNextPage={onNextPage} onRead={onRead} onOpenMail={onOpenMail} onChangeStar={onChangeStar}/>
+            <Outlet/>
         </div>
     )
 }

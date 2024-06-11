@@ -42,11 +42,6 @@
     grid-area: date;
 }
 
-/* .emaile-preview .item4{
-    max-inline-size: 100px;
-    min-inline-size: 100px;
-    justify-self: end;
-}  */
 
 .emaile-preview .actions{
     grid-area: date;

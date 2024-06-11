@@ -12,4 +12,7 @@
 @import "cmps/EmailPreview.css";
 @import "cmps/EmailFilter.css";
 @import "pages/App.css";
-@import "pages/EmaileDetailes.css"
+@import "pages/EmaileDetailes.css";
+@import "cmps/EmailCompose.css";
+@import "cmps/AsideMenu.css";
+@import "cmps/EmailFoldersList.css"

@@ -15,15 +15,21 @@
 
 .main-app .container{
     grid-area: main;
+    max-width: none;
+    margin: 5px;
     padding-left: 5px;
     padding-right: 2px;
 }
 
-.main-app aside{
+.main-app .app-header{
+    grid-area: header;
+}
+
+/* .main-app aside{
     border-radius: 2%;
     grid-area: aside;
     background-color:rgb(242, 242, 242);
-}
+} */
 
 .main-app footer{
     justify-content: center;

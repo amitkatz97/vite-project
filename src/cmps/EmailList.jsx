@@ -2,7 +2,7 @@ import { EmailPreview } from "./EmailPreview.jsx"
 import { emailService } from "../services/email.service.js"
 import { useEffect, useState } from "react"
 
-export function EmailList({emails , onRemoveEmail, onNextPage , onRead, onOpenMail, onChangeStar}){
+export function EmailList({emails , onRemoveEmail, onNextPage , onRead, onOpenMail, onChangeStar ,onTrashEmail}){
 
     const [pageNum, setPageNum] = useState()
 
