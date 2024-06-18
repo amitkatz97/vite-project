@@ -29,16 +29,15 @@ export function EmailSort({sortBy, onSetSortBy}){
     return (
         <>
         <section className='email-sort'>
-            <section>
-                <label htmlFor="sort"> Sort By: </label>
-                <br />
+            <section className='email-area'>
+                <label htmlFor="sort"></label>
                 <select onChange={handleChange} name ="sort" id= "sort">
                     <option value="date">Date</option>
                     <option value="starred">Stared Mail</option>
                     <option value="isRead">Unread mails</option>
                 </select>
-                <button onClick={cahngeSort} name='sort'>A-Z</button>
-                </section>
+                <button className='order-sort' onClick={cahngeSort} name='sort'>A-Z</button>
+            </section>
         </section>
         </>
     )

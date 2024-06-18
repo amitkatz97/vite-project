@@ -5,6 +5,7 @@ import { EmailFilter } from "../cmps/EmailFilter.jsx"
 import { ProgressBar } from "../cmps/ProgressBar.jsx"
 import { AsideMenu } from "./AsideMenu.jsx"
 import { EmailSort } from "../cmps/EmailSort.jsx"
+import { eventBusService, showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 import { Link, NavLink, useNavigate, useSearchParams, useParams, Outlet } from "react-router-dom";
 
 
@@ -15,7 +16,7 @@ export function EmailIndex(){
     const [emails, setEmails] = useState()
     const [sortBy, setSortBy] = useState(emailService.getDefaultSort())
     const [filterBy, setFilterBy] = useState(emailService.getFilterFromSearchParams(searchParams, params.folder))
-    const [unReadEmailCount, setUnReadEmailCount] = useState(emailService.fullQuery.length)
+    const [unReadEmailCount, setUnReadEmailCount] = useState(emailService.getUnreadEmails.length)
 
     useEffect(()=> {
         setSearchParams(filterBy)
@@ -54,9 +55,11 @@ export function EmailIndex(){
             } else {
                 await emailService.remove(email.id)
                 console.log("succed deleting")
+                showSuccessMsg('Email Removed')
             }
         } catch (error){
             console.log("Cant delete this email because:", error)
+            showErrorMsg(`Cannot Removed Email ${email.id}`)
         }
         await loadEmailes()
     }
@@ -64,6 +67,7 @@ export function EmailIndex(){
     async function onNextPage(){
         await emailService.nextPage()
         loadEmailes()
+
     }
 
     async function onChangeStar(email){
@@ -92,12 +96,11 @@ export function EmailIndex(){
     }
 
 
-
     if (!emails) return <div>Loading..</div>
     return (
         <div className="email-index">
-            <AsideMenu filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-            <ProgressBar progress={unReadEmailCount}/>
+            <AsideMenu filterBy={filterBy} onSetFilterBy={onSetFilterBy} unReadEmailCount ={unReadEmailCount}/>
+            {/* <ProgressBar progress={unReadEmailCount}/> */}
             <EmailSort sortBy={sortBy} onSetSortBy={onSetSortBy}/>
             <EmailFilter onSetFilterBy={onSetFilterBy} filterBy={filterBy}/> 
             <EmailList emails = {emails} onRemoveEmail={onRemoveEmail} onNextPage={onNextPage} onRead={onRead} onOpenMail={onOpenMail} onChangeStar={onChangeStar}/>

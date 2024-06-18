@@ -1,15 +1,15 @@
 
 
 .email-index {
-    background-color: rgb(255, 255, 255);;
+    background-color: rgb(242, 242, 242);
     display: grid;
-    grid-template-columns:  1fr 2fr 1fr 1fr;
+    grid-template-columns:  1fr 4fr 1fr;
     grid-template-rows: auto 1fr ;
     grid-template-areas:
-    "aside filter sort bar"
-    "aside list list list";
+    "aside filter sort"
+    "aside list list";
     margin-left: 2px;
-    gap: 5px;
+    gap: none;
     
 }
 
@@ -34,6 +34,7 @@
 .email-index .email-aside-menu{
     background-color:rgb(242, 242, 242);
     grid-area: aside;
+    height: 93vh;
 }
 .email-index .email-sort{
     grid-area: sort;

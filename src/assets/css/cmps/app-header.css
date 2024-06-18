@@ -2,6 +2,7 @@
     background-color: rgb(242, 242, 242);
     display: flex;
     align-items: center;
+    height: 40px;
 }
 
 .app-header h1{
@@ -18,7 +19,7 @@
     justify-content: end;
 }
 
-.app-header section.container{
+.app-header section .container{
     display: flex;
     align-items: center;
     justify-content: space-between;

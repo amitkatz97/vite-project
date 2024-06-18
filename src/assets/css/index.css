@@ -15,4 +15,6 @@
 @import "pages/EmaileDetailes.css";
 @import "cmps/EmailCompose.css";
 @import "cmps/AsideMenu.css";
-@import "cmps/EmailFoldersList.css"
+@import "cmps/EmailFoldersList.css";
+@import "cmps/EmailSort.css";
+@import "cmps/UserMsg.css"

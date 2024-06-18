@@ -3,14 +3,14 @@ import { useState } from 'react';
 import { EmailFolderList } from "../cmps/EmailFoldersList";
 
 
-export function AsideMenu({filterBy, onSetFilterBy}){
+export function AsideMenu({filterBy, onSetFilterBy , unReadEmailCount}){
     const navigate = useNavigate()
     return(
         <>
         <section className="email-aside-menu">
             <Link  className= "compose-area" to = "/emailes/:folder/edit/:emaileId?">Compose</Link>
             <br />
-            <EmailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} navigate={navigate}/>
+            <EmailFolderList filterBy={filterBy} onSetFilterBy={onSetFilterBy} navigate={navigate} unReadEmailCount ={unReadEmailCount}/>
         </section>
         </>
     )

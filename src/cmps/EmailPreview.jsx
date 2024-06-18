@@ -47,7 +47,7 @@ export function EmailPreview({emaile, onRemoveEmail, onRead, onOpenMail, onChang
                     ) : (
                     <section className="actions">
                         <button className="item4" onClick={() => onRead(emaile)}>{emaileState}</button>
-                        <button onClick={() => onRemoveEmail(emaile)}>X</button>
+                        <button onClick={() => onRemoveEmail(emaile)}> X </button>
                     </section>
                     )}
                 </div>

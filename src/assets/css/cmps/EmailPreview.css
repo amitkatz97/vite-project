@@ -3,13 +3,15 @@
 .emaile-preview {
     /* background-color:aliceblue; */
     display: grid;
-    grid-template-columns: auto 1fr 1fr 1fr;
+    grid-template-columns: auto 1fr 2fr auto;
     grid-template-rows: auto;
     grid-template-areas:
     "star from subject date";
     /* justify-content:space-between; */
-    border: solid 0.5px;
+    border:none;
     align-items: center;
+    border-bottom: solid 0.01px;
+    border-color: rgb(197, 197, 197);
 }
 
 
@@ -19,12 +21,18 @@
     align-items: center;
    
 } */
-
+.emaile-preview a:hover{
+    text-decoration: none;
+}
 .emaile-preview button{
     grid-area: star;
     margin: 8px;
     padding: 0%;
     height: fit-content;
+    background-color: transparent;
+    border: none;
+    font-size: large;
+    margin-right: 12px;
     
 }
 
@@ -40,6 +48,7 @@
 
 .emaile-preview .item3{
     grid-area: date;
+    margin-right: 10px;
 }
 
 
@@ -48,10 +57,22 @@
     display: flex;
     flex-direction: row;
     margin: 2px;
+    
 }
 
 .emaile-preview .actions button{
-margin: 2px;
+   margin: 2px;
+   margin-right: 10px;
+   padding: 4px;
+   border-radius: 50%;
+   
+}
+
+.emaile-preview .actions button:hover{
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    border-radius: 50%;
+    transition: 0.6;
+    background-color:#c9def1;
 }
 
 .read {

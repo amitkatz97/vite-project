@@ -1,39 +1,16 @@
 
-
-.email-filter{
+.email-sort{
     display: flex;
     flex-direction: row;
+    padding-left: 10px;
     align-items: center;
-    background-color:#f2f2f2;
-    justify-content: space-between;
     
 }
 
-.email-filter section{
-    margin: 5px;
-}
-
-.email-filter .any-search input{
-    width: 400px;
-    border-radius: 30px;
-    padding: 10px;
-    font-size: large;
-    border: 1px solid #ced4da;
-    background-color: rgb(219, 232, 243);
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    background-clip: padding-box;
-}
-
-.email-filter .any-search input:hover{
-    border-color: #b8b8b8;
-    outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
-}
-
-.email-filter .read-search select{
-    margin-right: 5px;
-    padding: 10px;
-    padding: .375rem .75rem;
+.email-sort .email-area{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     font-size: 1rem;
     line-height: 1.5;
     color: #495057;
@@ -43,14 +20,32 @@
     border-radius: 30px;
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     font-size: small;
-    
 }
 
-.email-filter .read-search select:hover{
+.email-sort select, .order-sort{
+    margin-right: 5px;
+    padding: 10px;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: rgb(219, 232, 243);
+    background-clip: padding-box;
+    border: none;
+    border-radius: 30px;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    font-size: small;
+}
+
+.email-sort select:hover{
     border-color: #b8b8b8;
     outline: 0;
     box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
     cursor: pointer;
 }
 
-
+.email-sort .order-sort:hover{
+    border-color: #b8b8b8;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}

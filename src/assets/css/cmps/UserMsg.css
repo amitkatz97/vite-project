@@ -1,0 +1,29 @@
+
+.user-msg{
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: brown;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    opacity: 80%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.user-msg.success{
+    background-color: rgb(122, 231, 122);
+}
+
+.user-msg.erorr{
+    background-color: rgb(247, 102, 102);
+}
+
+.user-msg .close-btn{
+    width: 15px;
+    background-color:transparent;
+    border: none;
+    align-self: end;
+    padding-top: 0%;
+}

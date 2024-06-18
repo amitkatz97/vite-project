@@ -3,20 +3,87 @@
 .email-compose{
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
     height: 400px;
     aspect-ratio: 1;
-    top: -10%;
-    position: fixed;
+    top: 20px;
+    position:sticky;
     inset: 0;
-    top: -10%;
+    left: 10px;
     margin: auto;
-    box-shadow:
-        0 0 0 100vmax rgba(0, 0, 0, 0.5),
-        -3px 1px 28px #00000043;
-    padding: 50px;
+    padding: 0px;
     background-color: rgb(236, 239, 236);
     border: solid 3px hsl(230, 100%, 85%);
     border-radius: 10px;
+    
+}
+.email-compose .header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(201, 222, 241);
+    align-items: center;
+    font-style:italic;
+    font-size: large;
+}
+
+.email-compose form{
+    margin: 5px;
+    color: aliceblue;
+
+}
+
+.email-compose a{
+    margin: 5px;
+}
+
+.email-compose button{
+    background-color: blue;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
+    border: none;
+    width: 30px;
+    height: 20px;
+}
+.email-compose button:hover{
+    transition: 0.4;
+    transform: scale(1.06);
+}
+
+.email-compose h1{
+    background-color: rgb(201, 222, 241);
+    height: 30px;
+    margin-left: 3px;
+}
+
+.email-compose .to{
+    width: 600px;
+    height: 30px;
+    border: none;
+    font-size:large;
+    margin: 1px;
+}
+
+.email-compose .subject{
+    width: 600px;
+    height: 30px;
+    border: none;
+    font-size:large;
+    margin: 1px;
+}
+
+.email-compose .body{
+    text-align: start;
+    width: 600px;
+    height: 200px;
+    margin-bottom: 5px;
+    border: none;
+    font-size:large;
+}
+
+.email-compose form button{
+   margin-top: 10px;
+   width: 80px;
+   height: 40px;
+   font-size: large;
 }

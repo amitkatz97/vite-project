@@ -37,16 +37,16 @@ export function EmailFilter({filterBy, onSetFilterBy}){
     const {from , isRead, subject} = filterToEdit
     return(
         <form onSubmit={onSubmitFilter} className="email-filter">
-            <section>
-                <label htmlFor="from"> From</label> <br />
-                <input onChange={handleChange} name="from" id= "from" type="text" placeholder="Search Contact" value={from} />
+            <section className="any-search">
+                <label htmlFor="from"></label>
+                <input onChange={handleChange} name="from" id= "from" type="text" placeholder="Search in Mail" value={from} />
             </section>
-            <section>
+            {/* <section>
                 <label htmlFor="subject"> subject</label> <br />
                 <input onChange={handleChange} name="subject" id="subject" type="text" placeholder="Search by subject" value={subject} />
-            </section>
-            <section>
-                <label htmlFor="isRead"> Read / unread / all</label><br />
+            </section> */}
+            <section className="read-search">
+                <label htmlFor="isRead"></label>
                 <select onChange={handleChange} name ="isRead" id= "isRead">
                     <option value="true">Read</option>
                     <option value="false">Unread</option>

@@ -1,7 +1,12 @@
 
 .email-list{
-    border: solid 0.5px;
+    border: none;
     /* width: 600px; */
+    border-radius: 20px;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    overflow-x: scroll;
+    max-height: 85vh;
 
 }
 
@@ -9,8 +14,8 @@
     list-style-type:none;
     margin: 0;
     padding: 0;
+    
 }
-
 .email-list table{
     display: grid;
     grid-template-columns: auto 1fr 1fr 1fr auto;
@@ -19,33 +24,24 @@
     "star from subject date but";
     
 }
-.email-list table .star{
-    grid-area: star;
-    margin-right: 5px;
-}
-.email-list table .from{
-    grid-area: from;
-    text-align: start;
-    
-}
-.email-list table .subject{
-    grid-area: subject;
-    text-align: start;
-}
-.email-list table .date{
-    grid-area: date;
-    text-align: start;
-}
-.email-list table .actions{
-    grid-area: but;
-}
+
 .email-list ul :hover{
     transition: 0.5;
     /* background-color: rgb(189, 234, 241); */
-    font-weight: bold;
-    transform: scale(1.008);
+    transform: scale(1.004);
 }
 
 .email-list .emailes-actions{
     display: flex;
+}
+
+.email-list .next-page{
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+.email-list .next-page:hover{
+    transition: 0.4;
+    background-color: rgb(224, 223, 223);
 }

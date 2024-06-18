@@ -2,7 +2,7 @@ import {storageService} from "./asynce-storage.service"
 import {utilService} from "./util.service"
 
 const EMAIL_KEY='emailesDB'
-const PAGE_SIZE = 16 
+const PAGE_SIZE = 30 
 var gPageIdx = 0
 const loggedInUser = {
     email: 'Amit@Reemon.com',
@@ -19,7 +19,7 @@ export const emailService ={
     nextPage,
     fullQuery,
     getUnreadEmails,
-    gPageIdx,
+    getPageIdx,
     getFolders,
     getLoggedUser,
     getFilterFromSearchParams,
@@ -49,9 +49,8 @@ async function nextPage(){
     const emiles = await storageService.query(EMAIL_KEY)
     gPageIdx++
     if (gPageIdx * PAGE_SIZE >= emiles.length){
-        gPageIdx  =0
+        gPageIdx = 0
     }
-
     return gPageIdx
 }
 
@@ -59,7 +58,7 @@ function remove(emailId){
     return storageService.remove(EMAIL_KEY, emailId)
     
 }
-function post (EMAIL_KEY , obj){
+function post (obj){
     return storageService.post(EMAIL_KEY, obj)
 }
 
@@ -75,7 +74,9 @@ function getById(id) {
 }
 
 
-
+function getPageIdx(){
+    return gPageIdx
+}
 function getLoggedUser() {
     return loggedInUser
 }
@@ -212,10 +213,10 @@ function _createSendEmail(){
 
 function _createEmailes(){
     const emailes =[]
-    for( var i = 0; i <35; i++){
+    for( var i = 0; i <53; i++){
         emailes.push(_createEmail())
     }
-    for( var i = 0; i <10; i++){
+    for( var i = 0; i <15; i++){
         emailes.push(_createSendEmail())
     }
     console.log('emiles are set')

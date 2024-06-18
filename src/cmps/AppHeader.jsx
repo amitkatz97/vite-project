@@ -24,7 +24,6 @@ export function AppHeader(){
                 </nav>
 
             </section>
-            <img src = "vite-project\src\assets\imgs\face.jpg"></img>
         </header>
         </>
     )

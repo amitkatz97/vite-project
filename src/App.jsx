@@ -7,6 +7,7 @@ import { EmailIndex } from "./pages/EmailIndex.jsx";
 import { EmaileDetailes } from './pages/EmaileDetailes.jsx';
 import { AsideMenu } from './pages/AsideMenu.jsx';
 import {EmailCompose} from "./cmps/EmailCompose.jsx"
+import { UserMsg } from './cmps/UserMsg.jsx';
 
 
 
@@ -31,6 +32,7 @@ export function App() {
                     Email 2024, all rights reserved &copy;
                 </section>
             </footer>
+            <UserMsg />
         </section>
       </Router>
 )}
